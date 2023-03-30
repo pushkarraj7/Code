@@ -14,19 +14,17 @@
  * }
  */
 class Solution {
-    public int maxDepth(TreeNode node) {
-         if (node == null)
+    public int maxDepth(TreeNode root) {
+         if (root == null)
             return 0;
         else {
-            /* compute the depth of each subtree */
-            int lDepth = maxDepth(node.left);
-            int rDepth = maxDepth(node.right);
+            int ld = maxDepth(root.left);
+            int rd = maxDepth(root.right);
  
-            /* use the larger one */
-            if (lDepth > rDepth)
-                return (lDepth + 1);
+            if (ld > rd)
+                return (ld + 1);
             else
-                return (rDepth + 1);
+                return (rd + 1);
         }
     }
 }
