@@ -20,16 +20,12 @@ class Solution {
         ans[p1] += sum / 10;
       }
     }
-
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < ans.length; i++) {
-      if (i == 0 && ans[i] == 0) {
+      if (i == 0 && ans[i] == 0)
         continue;
-      }
       sb.append(ans[i]);
     }
-
     return sb.toString();
   }
-
 }
