@@ -22,19 +22,14 @@ class Solution {
     }
     
     private void helper(TreeNode root, int targetSum, List<List<Integer>> result, List<Integer> path) {
-        if (root == null) {
-            return;
-        }
-        
+        if (root == null) return;
         path.add(root.val);
-        
-        if (root.left == null && root.right == null && root.val == targetSum) {
+        if (root.left == null && root.right == null && root.val == targetSum)
             result.add(new ArrayList<>(path));
-        } else {
+        else {
             helper(root.left, targetSum - root.val, result, path);
             helper(root.right, targetSum - root.val, result, path);
         }
-        
         path.remove(path.size() - 1);
     }
 }
