@@ -11,9 +11,6 @@ class Solution {
         helper(image,sr+1,sc,color,vis,orgCol); //down
     }
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
-        // if(image == null || image.length == 0 || image[0].length == 0 || sr < 0 || sr >= image.length || sc < 0 || sc >= image[0].length) {
-        //     return image;
-        // }
         boolean[][] vis=new boolean[image.length][image[0].length];
         helper(image,sr,sc,color,vis,image[sr][sc]);
         return image;
