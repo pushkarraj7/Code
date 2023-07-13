@@ -12,6 +12,7 @@ class Solution {
         }
         
         int[] visited = new int[numCourses];
+        
         for (int i = 0; i < numCourses; i++) {
             if (hasCycle(graph, visited, i)) {
                 return false; // Cycle detected, course schedule is not possible
@@ -24,9 +25,11 @@ class Solution {
         if (visited[course] == 1) {
             return true;
         }
+        
         if (visited[course] == -1) {
             return false;
-        }        
+        }
+        
         visited[course] = 1;
         
         for (int prerequisite : graph.get(course)) {
