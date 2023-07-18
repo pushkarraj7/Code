@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 class LRUCache {
     private int capacity;
     private Map<Integer, Node> cache;
