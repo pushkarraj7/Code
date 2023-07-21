@@ -5,9 +5,10 @@ class Solution {
         int[] dp = new int[n];
         int[] count = new int[n];
         int maxLength = 0;
+
         Arrays.fill(dp, 1);
         Arrays.fill(count, 1);
-        
+
         for (int j = 1; j < n; j++) {
             for (int i = 0; i < j; i++) {
                 if (nums[i] < nums[j]) {
@@ -21,7 +22,6 @@ class Solution {
             }
             maxLength = Math.max(maxLength, dp[j]);
         }
-        
         int ans = 0;
         for (int i = 0; i < n; i++) {
             if (dp[i] == maxLength) {
