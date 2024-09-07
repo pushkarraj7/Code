@@ -10,15 +10,29 @@
  */
 class Solution {
   public ListNode modifiedList(int[] nums, ListNode head) {
-    ListNode dummy = new ListNode(0, head);
-    Set<Integer> numsSet = Arrays.stream(nums).boxed().collect(Collectors.toSet());
-
-    for (ListNode curr = dummy; curr.next != null;)
-      if (numsSet.contains(curr.next.val))
-        curr.next = curr.next.next;
-      else
-        curr = curr.next;
-
-    return dummy.next;
+    boolean set[] = new boolean[(int)1e5+1];
+      for(int num:nums){
+          set[num] = true;
+      }
+      ListNode prev = null;
+      ListNode curr = head;
+      while(curr != null){
+          if(set[curr.val] == true){
+              if(prev==null){
+                  head = head.next;
+                  curr.next = null;
+                  curr = head;
+              } else{
+                  prev.next = curr.next;
+                  curr.next = null;
+                  curr = prev.next;
+              }
+          }
+          else{
+              prev = curr;
+              curr = curr.next;
+          }
+      }
+      return head;
   }
 }
