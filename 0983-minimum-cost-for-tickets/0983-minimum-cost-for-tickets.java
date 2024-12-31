@@ -1,23 +1,19 @@
 class Solution {
-    public int mincostTickets(int[] days, int[] costs) {
-        int[] dp = new int[days.length];
-        dp[0] = Math.min(costs[0], Math.min(costs[1], costs[2]));
+  public int mincostTickets(int[] days, int[] costs) {
+    int ans = 0;
+    Queue<Pair<Integer, Integer>> last7 = new ArrayDeque<>(); // [day, cost]
+    Queue<Pair<Integer, Integer>> last30 = new ArrayDeque<>();
 
-        for (int i = 1; i < days.length; i++) {
-            dp[i] = dp[i - 1] + costs[0];
-
-            int j = i - 1;
-            while (j >= 0 && days[i] - days[j] < 7) {
-                j--;
-            }
-            dp[i] = Math.min(dp[i], (j >= 0 ? dp[j] : 0) + costs[1]);
-
-            while (j >= 0 && days[i] - days[j] < 30) {
-                j--;
-            }
-            dp[i] = Math.min(dp[i], (j >= 0 ? dp[j] : 0) + costs[2]);
-        }
-
-        return dp[days.length - 1];
+    for (final int day : days) {
+      while (!last7.isEmpty() && last7.peek().getKey() + 7 <= day)
+        last7.poll();
+      while (!last30.isEmpty() && last30.peek().getKey() + 30 <= day)
+        last30.poll();
+      last7.offer(new Pair<>(day, ans + costs[1]));
+      last30.offer(new Pair<>(day, ans + costs[2]));
+      ans = Math.min(ans + costs[0], Math.min(last7.peek().getValue(), last30.peek().getValue()));
     }
+
+    return ans;
+  }
 }
