@@ -1,21 +1,21 @@
 class Solution {
-    public int countPalindromicSubsequence(String s) {
-        int n = s.length();
-        int count = 0;
+  public int countPalindromicSubsequence(String s) {
+    int ans = 0;
+    int[] first = new int[26];
+    int[] last = new int[26];
 
-        for (char c = 'a'; c <= 'z'; c++) {
-            int firstOccurrence = s.indexOf(c);
-            int lastOccurrence = s.lastIndexOf(c);
+    Arrays.fill(first, s.length());
 
-            if (firstOccurrence != -1 && lastOccurrence != -1 && firstOccurrence < lastOccurrence) {
-                Set<Character> middleChars = new HashSet<>();
-                for (int i = firstOccurrence + 1; i < lastOccurrence; i++) {
-                    middleChars.add(s.charAt(i));
-                }
-                count += middleChars.size();
-            }
-        }
-
-        return count;
+    for (int i = 0; i < s.length(); ++i) {
+      final int index = s.charAt(i) - 'a';
+      first[index] = Math.min(first[index], i);
+      last[index] = i;
     }
+
+    for (int i = 0; i < 26; ++i)
+      if (first[i] < last[i])
+        ans += s.substring(first[i] + 1, last[i]).chars().distinct().count();
+
+    return ans;
+  }
 }
